@@ -14,13 +14,16 @@ const ImagePicker = ({ onTakeImage }) => {
     useCameraPermissions()
 
   const verifyPermission = async () => {
-    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+    if (
+      cameraPermissionInformation.status === PermissionStatus.UNDETERMINED ||
+      cameraPermissionInformation.status !== PermissionStatus.GRANTED
+    ) {
       const permissionResponse = await requestPermission()
       return permissionResponse.granted
     }
 
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
-      Alert.alert('Mission permission', 'App needs Permissions')
+      Alert.alert('Missing permissions', 'App needs Camera Permissions')
       return false
     }
 

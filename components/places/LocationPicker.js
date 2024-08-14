@@ -42,10 +42,9 @@ const LocationPicker = ({ onPickLocation }) => {
   const verifyPermissions = async () => {
     if (
       locationPermissionInformation.status === PermissionStatus.UNDETERMINED ||
-      locationPermissionInformation.status !== permissionResponse.granted
+      locationPermissionInformation.status !== PermissionStatus.GRANTED
     ) {
       const permissionResponse = await requestPermission()
-      console.log('permissionResponse..', permissionResponse)
       return permissionResponse.granted
     }
 
